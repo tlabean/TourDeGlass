@@ -9,9 +9,9 @@ public class GradeController : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		//ground.transform.position = ground.transform.position + Vector3.forward * bikeController.velocity * Time.deltaTime;
-
 		Material groundMaterial = ground.GetComponent<MeshRenderer>().material;
 		groundMaterial.mainTextureOffset = new Vector2(0f, groundMaterial.mainTextureOffset.y + bikeController.velocity * Time.deltaTime);
+		transform.rotation = Quaternion.Euler (grade, 0f, 0f);
+
 	}
 }
