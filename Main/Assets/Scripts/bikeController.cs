@@ -4,7 +4,7 @@ using System.Collections;
 
 
 public class bikeController : MonoBehaviour {
-	public float SPEED_CONSTANT = 0.5f;
+	public float SPEED_CONSTANT = 1.5f;
 	
 	// Use this for initialization
 	void Start () {
@@ -12,8 +12,14 @@ public class bikeController : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
-		transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z+SPEED_CONSTANT);
+	void FixedUpdate () {
+		transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (1 *SPEED_CONSTANT));
 
 	}
+
+	void onTriggerEnter(Collider other) {
+		SPEED_CONSTANT = -1;
+	
+	}
+
 }
