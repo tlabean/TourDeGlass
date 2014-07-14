@@ -13,13 +13,9 @@ public class bikeController : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (1 *SPEED_CONSTANT));
+		transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (1 * SPEED_CONSTANT));
 
 	}
-
-	void onTriggerEnter(Collider other) {
-		SPEED_CONSTANT = -1;
 	
-	}
 
 }
