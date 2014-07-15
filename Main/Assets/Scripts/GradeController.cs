@@ -9,6 +9,11 @@ public class GradeController : MonoBehaviour {
 
 	void FixedUpdate()
 	{
+
+		if(Input.GetKeyDown(KeyCode.W) && grade < 50) 
+			grade++;
+		if(Input.GetKeyDown(KeyCode.S) && grade > -50)
+			grade--;
 		Material groundMaterial = ground.GetComponent<MeshRenderer>().material;
 		groundMaterial.mainTextureOffset = new Vector2(0f, groundMaterial.mainTextureOffset.y + bikeController.velocity * Time.deltaTime);
 		transform.rotation = Quaternion.Euler (grade, 0f, 0f);
