@@ -17,7 +17,8 @@ public class SonificationChannel : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		audioSource.volume = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
-		audioSource.pitch = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
+		//audioSource.pitch = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
+		audioSource.pitch = 2;
 	}
 
 	void InitializeAudioSource()
