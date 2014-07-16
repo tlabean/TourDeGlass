@@ -10,6 +10,9 @@ public class SoundController : MonoBehaviour {
 	public float mainAudioVolumeScale = 1f;
 	public AudioSource secondarySource;
 
+	public AudioClip bikePassing;
+	public AudioClip carPassing;
+
 	public GradeController gradeController;
 	public BikeController bikeController;
 	public Transform pedals;
@@ -19,12 +22,20 @@ public class SoundController : MonoBehaviour {
 
 	void Awake()
 	{
-		mainAudioVolume = mainSource.volume;
+		mainAudioVolume = 0.2f;
 		pedalsLastXRotation = pedals.rotation.eulerAngles.x;
 	}
 
 	void FixedUpdate()
 	{
+
+		if(Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			secondarySource.clip = bikePassing;
+			secondarySource.Play();
+		}
+
+
 		if(pedalsLastXRotation < 180f && pedals.rotation.eulerAngles.x > 180f)
 		{
 
@@ -34,7 +45,7 @@ public class SoundController : MonoBehaviour {
 			else
 				mainSource.clip = slowSound;
 
-			mainSource.volume = mainAudioVolume + bikeController.pedalCadence * mainAudioVolumeScale;
+			mainSource.volume = mainAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * mainAudioVolumeScale;
 
 			mainSource.Play();
 		}
