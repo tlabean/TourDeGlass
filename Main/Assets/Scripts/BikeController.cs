@@ -23,15 +23,16 @@ public class BikeController : MonoBehaviour {
 
 	}
 
-	void FixedUpdate()
+	void Update()
 	{
-
 		if(Input.GetKeyDown(KeyCode.UpArrow) && gear < 9)
 			gear++;
 		if(Input.GetKeyDown(KeyCode.DownArrow) && gear > 1)
 			gear--;
+	}
 
-
+	void FixedUpdate()
+	{
 		velocity -= (velocity * fluidFriction + velocity * velocity * fluidFriction) / bikeMass * Time.deltaTime;
 		velocity += -9.8f * Mathf.Sin (gradeController.grade * Mathf.Deg2Rad) * Time.deltaTime;
 		velocity += pedalTorque / ((float)(gear - 1) * gearMultiplier + 1f) * Time.deltaTime;
