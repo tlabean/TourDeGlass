@@ -47,6 +47,7 @@ public class SoundController : MonoBehaviour {
 
 		if(pedalsLastXRotation < 180f && pedals.rotation.eulerAngles.x > 180f)
 		{
+			mainSource.volume = mainAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * mainAudioVolumeScale;
 
 			if(!mainSource.isPlaying)
 			{
@@ -54,11 +55,11 @@ public class SoundController : MonoBehaviour {
 					mainSource.clip = fastSound;
 				else if(bikeController.pedalCadence < 7f - closeZone)
 					mainSource.clip = slowSound;
-				else
+				else {
 					mainSource.clip = closeSound;
+					mainSource.volume = mainAudioVolume;
+				}
 
-
-				mainSource.volume = mainAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * mainAudioVolumeScale;
 
 				mainSource.Play();
 			}
