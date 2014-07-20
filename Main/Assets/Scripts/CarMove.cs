@@ -21,6 +21,7 @@ void Awake(){
 startTime = Time.time;
 endPoint = new Vector3(2.3f,1.0f,-10.0f);
 go1 = GameObject.Find("Bike");
+alarmSource.clip = alarm;
 }
 
 void FixedUpdate(){
@@ -43,7 +44,6 @@ void FixedUpdate(){
 		transform.position = Vector3.Lerp(startPoint,endPoint,(Time.time-startTime)/11.0f);
 		
 		if(dist > 8f){
-		alarmSource.clip = alarm;
 		alarmSource.Play();
         }
 		
