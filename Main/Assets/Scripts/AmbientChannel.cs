@@ -22,14 +22,14 @@ public class AmbientChannel : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (gradeController.grade > 3) {
+		if (gradeController.grade >= 3) {
 			//audioSource.volume = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
 			//audioSource.pitch = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
 			audioSource.volume = ambientAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * ambientAudioVolumeScale;
 
 			audioSource.pitch = 2f;
 		}
-		else if ( gradeController.grade < -3) {
+		else if ( gradeController.grade <= -3) {
 			//audioSource.volume = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
 			//audioSource.pitch = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
 			audioSource.volume = ambientAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * ambientAudioVolumeScale;
