@@ -4,10 +4,14 @@ using System.Collections;
 public class SoundController : MonoBehaviour {
 
 
+	public float closeZone = 0.5f;
+	public float mainAudioVolume = 0f;
+	public float mainAudioVolumeScale = 1f;
+	
 	public AudioSource mainSource;
 	public AudioClip slowSound;
+	public AudioClip closeSound;
 	public AudioClip fastSound;
-	public float mainAudioVolumeScale = 1f;
 	public AudioSource secondarySource;
 
 	public AudioClip bikePassing;
@@ -17,12 +21,12 @@ public class SoundController : MonoBehaviour {
 	public BikeController bikeController;
 	public Transform pedals;
 
-	private float mainAudioVolume;
 	private float pedalsLastXRotation;
+
+	private bool playAgain = false;
 
 	void Awake()
 	{
-		mainAudioVolume = 0.2f;
 		pedalsLastXRotation = pedals.rotation.eulerAngles.x;
 	}
 
@@ -35,19 +39,33 @@ public class SoundController : MonoBehaviour {
 			secondarySource.Play();
 		}
 
+		if(playAgain && !mainSource.isPlaying)
+		{
+			mainSource.Play ();
+			playAgain = false;
+		}
 
 		if(pedalsLastXRotation < 180f && pedals.rotation.eulerAngles.x > 180f)
 		{
 
+			if(!mainSource.isPlaying)
+			{
+				if(bikeController.pedalCadence > 7f + closeZone)
+					mainSource.clip = fastSound;
+				else if(bikeController.pedalCadence < 7f - closeZone)
+					mainSource.clip = slowSound;
+				else
+					mainSource.clip = closeSound;
 
-			if(bikeController.pedalCadence > 7f)
-				mainSource.clip = fastSound;
+
+				mainSource.volume = mainAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * mainAudioVolumeScale;
+
+				mainSource.Play();
+			}
 			else
-				mainSource.clip = slowSound;
-
-			mainSource.volume = mainAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * mainAudioVolumeScale;
-
-			mainSource.Play();
+			{
+				playAgain = true;
+			}
 		}
 		pedalsLastXRotation = pedals.rotation.eulerAngles.x;
 	}
