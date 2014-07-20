@@ -3,32 +3,36 @@ using System.Collections;
 
 public class AmbientChannel : MonoBehaviour {
 
+	public float ambientCloseZone = 0.5f;
+	public float ambientAudioVolume = 0f;
+	public float ambientAudioVolumeScale = 1f;
+
 	public BikeController bikeController;
 	public GradeController gradeController;
-	public SoundController soundController;
-	public AudioClip ambientSound;
-	private AudioSource audioSource;
+	//public SoundController soundController;
+	//public AudioClip ambientSound;
+	public AudioSource audioSource;
 	public float cadenceTarget = 7f;
 	// Use this for initialization
-	void Start () {
+	/*void Start () {
 		InitializeAudioSource();
 		audioSource.Play ();
 		audioSource.loop = true;
-	}
+	}*/
 	
 	// Update is called once per frame
 	void Update () {
 		if (gradeController.grade > 3) {
 			//audioSource.volume = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
 			//audioSource.pitch = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
-			audioSource.volume = soundController.mainAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * soundController.mainAudioVolumeScale;
+			audioSource.volume = ambientAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * ambientAudioVolumeScale;
 
 			audioSource.pitch = 2f;
 		}
 		else if ( gradeController.grade < -3) {
 			//audioSource.volume = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
 			//audioSource.pitch = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
-			audioSource.volume = soundController.mainAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * soundController.mainAudioVolumeScale;
+			audioSource.volume = ambientAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * ambientAudioVolumeScale;
 			audioSource.pitch = 1f;
 		}
 		else {
@@ -38,7 +42,7 @@ public class AmbientChannel : MonoBehaviour {
 
 	}
 
-	void InitializeAudioSource()
+	/*void InitializeAudioSource()
 	{
 		//we setup a new AudioSource here to not conflict with any ambient sound effects
 		//we may have put on objects in our scene
@@ -53,5 +57,5 @@ public class AmbientChannel : MonoBehaviour {
 		go.name = "Amibent-" + gameObject.name;
 		audioSource = go.AddComponent<AudioSource>();
 		audioSource.clip = ambientSound;
-	}
+	}*/
 }
