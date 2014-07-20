@@ -5,6 +5,7 @@ public class AmbientChannel : MonoBehaviour {
 
 	public BikeController bikeController;
 	public GradeController gradeController;
+	public SoundController soundController;
 	public AudioClip ambientSound;
 	private AudioSource audioSource;
 	public float cadenceTarget = 7f;
@@ -18,13 +19,16 @@ public class AmbientChannel : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (gradeController.grade > 3) {
-			audioSource.volume = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
+			//audioSource.volume = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
 			//audioSource.pitch = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
+			audioSource.volume = soundController.mainAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * soundController.mainAudioVolumeScale;
+
 			audioSource.pitch = 2f;
 		}
 		else if ( gradeController.grade < -3) {
-			audioSource.volume = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
+			//audioSource.volume = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
 			//audioSource.pitch = Mathf.Abs(1 - (Mathf.Abs(bikeController.pedalCadence / cadenceTarget)));
+			audioSource.volume = soundController.mainAudioVolume + Mathf.Abs(bikeController.pedalCadence - 7f) * soundController.mainAudioVolumeScale;
 			audioSource.pitch = 1f;
 		}
 		else {
