@@ -24,6 +24,6 @@ public class GUIController : MonoBehaviour {
 			gearMessage = "PERFECT";
 		}
 
-		GUI.Box(new Rect(Screen.width * 0.6f, 0f, Screen.width * 0.4f, Screen.height * 0.3f), "<size=50>Incline: " + gradeController.grade + "\n" + gearMessage + "</size>");
+		GUI.Box(new Rect(Screen.width * 0.6f, 0f, Screen.width * 0.4f, Screen.height * 0.3f), "<size=50>Incline: " + gradeController.grade + "\n" + gearMessage + "\n" + "Gear: " + bikeController.gear +"</size>");
 	}
 }
