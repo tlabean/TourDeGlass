@@ -43,5 +43,8 @@ public class BikeController : MonoBehaviour {
 		pedals.Rotate ( velocity * Time.deltaTime / wheelRadius / 2f * Mathf.PI * Mathf.Rad2Deg / ((float)(gear-1) * gearMultiplier + 1f) , 0f, 0f);
 		pedalCadence = velocity * Time.deltaTime / wheelRadius / 2f * Mathf.PI * Mathf.Rad2Deg / ((float)(gear-1) * gearMultiplier + 1f);
 	}
+	public int getCurrentGear () {
+		return gear;
+	}
 
 }

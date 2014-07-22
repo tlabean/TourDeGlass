@@ -9,17 +9,8 @@ public class AlertNotify : MonoBehaviour {
 	// Use this for initialization
 	
 	// Update is called once per frame
-	void Update () {
-		if (bikeController.pedalCadence > 10 && !alertSound.isPlaying && !flagSet) {
-						alertSound.volume = 0.25f;
-						alertSound.Play ();
-						flagSet = true;
-				}
-		if (bikeController.pedalCadence < 10 && flagSet) {
-						flagSet = false;
-						alertSound.volume = 0;
-				}
-
-
+	public void playSound () {
+			alertSound.volume = 0.25f;
+			alertSound.Play ();
 	}
 }
